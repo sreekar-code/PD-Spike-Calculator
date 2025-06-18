@@ -3,12 +3,12 @@ import { setupCalculator } from './calculator.js'
 
 document.querySelector('#app').innerHTML = `
   <div class="calculator-container">
-    <header class="header">
-      <h1>Spike vs PagerDuty</h1>
-      <p>Annual Cost Savings Calculator</p>
-    </header>
-
     <div class="calculator-content">
+      <header class="header">
+        <h1>Spike vs PagerDuty</h1>
+        <p>Annual Cost Savings Calculator</p>
+      </header>
+
       <div class="input-section">
         <div class="input-group">
           <label for="users">Number of Users</label>

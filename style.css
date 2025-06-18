@@ -15,32 +15,36 @@ body {
   min-height: 100vh;
   background: linear-gradient(135deg, #0e4dc4 0%, #0a3a9a 100%);
   padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator-content {
+  max-width: 800px;
+  width: 100%;
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .header {
   text-align: center;
   margin-bottom: 3rem;
-  color: white;
+  color: #1f2937;
 }
 
 .header h1 {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  color: #0e4dc4;
 }
 
 .header p {
   font-size: 1.1rem;
-  opacity: 0.9;
-}
-
-.calculator-content {
-  max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 16px;
-  padding: 2.5rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  color: #6b7280;
 }
 
 .input-section {
@@ -361,6 +365,14 @@ body {
 @media (max-width: 768px) {
   .calculator-container {
     padding: 1rem 0.5rem;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  
+  .calculator-content {
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 1rem;
   }
   
   .header {
@@ -374,11 +386,6 @@ body {
   
   .header p {
     font-size: 1rem;
-  }
-  
-  .calculator-content {
-    padding: 1.5rem;
-    border-radius: 12px;
   }
   
   .input-section {
@@ -464,12 +471,21 @@ body {
     padding: 0.75rem 0.25rem;
   }
   
+  .calculator-content {
+    padding: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  
+  .header {
+    margin-bottom: 1.5rem;
+  }
+  
   .header h1 {
     font-size: 1.75rem;
   }
   
-  .calculator-content {
-    padding: 1.25rem;
+  .header p {
+    font-size: 0.95rem;
   }
   
   .toggle-container {
@@ -518,6 +534,11 @@ body {
 @media (max-width: 768px) and (orientation: landscape) {
   .calculator-container {
     padding: 1rem 0.5rem;
+    align-items: center;
+  }
+  
+  .calculator-content {
+    margin-top: 0;
   }
   
   .header {
@@ -526,10 +547,6 @@ body {
   
   .header h1 {
     font-size: 1.75rem;
-  }
-  
-  .calculator-content {
-    padding: 1.5rem;
   }
   
   .pricing-cards {
@@ -564,5 +581,40 @@ body {
   .input-group input {
     padding: 1rem;
     font-size: 1.1rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .calculator-container {
+    padding: 0.5rem 0.125rem;
+  }
+  
+  .calculator-content {
+    padding: 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .header p {
+    font-size: 0.9rem;
+  }
+  
+  .toggle-text {
+    font-size: 0.8rem;
+  }
+  
+  .pricing-card {
+    padding: 1rem;
+  }
+  
+  .amount {
+    font-size: 1.75rem !important;
+  }
+  
+  .savings-amount .amount {
+    font-size: 2rem !important;
   }
 }
