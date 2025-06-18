@@ -12,7 +12,7 @@ document.querySelector('#app').innerHTML = `
       <div class="input-section">
         <div class="input-group">
           <label for="users">Number of Users</label>
-          <input type="number" id="users" value="10" min="1" placeholder="Enter number of users">
+          <input type="number" id="users" value="" min="1" placeholder="Enter number of users">
         </div>
 
         <div class="toggle-group">
@@ -32,7 +32,7 @@ document.querySelector('#app').innerHTML = `
             <h3>Spike</h3>
             <div class="price">
               <span class="currency">$</span>
-              <span class="amount" id="spike-price">1,800</span>
+              <span class="amount" id="spike-price">-</span>
             </div>
             <div class="period">per year</div>
           </div>
@@ -41,7 +41,7 @@ document.querySelector('#app').innerHTML = `
             <h3>PagerDuty</h3>
             <div class="price">
               <span class="currency">$</span>
-              <span class="amount" id="pagerduty-price">7,200</span>
+              <span class="amount" id="pagerduty-price">-</span>
             </div>
             <div class="period">per year</div>
             <div class="addons-note" id="addons-status">Add-ons not included</div>
@@ -53,9 +53,9 @@ document.querySelector('#app').innerHTML = `
             <div class="savings-label">Annual Savings</div>
             <div class="savings-amount">
               <span class="currency">$</span>
-              <span class="amount" id="savings-amount">5,400</span>
+              <span class="amount" id="savings-amount">-</span>
             </div>
-            <div class="savings-percentage" id="savings-percentage">75.0% less</div>
+            <div class="savings-percentage" id="savings-percentage">Enter users to calculate</div>
           </div>
         </div>
       </div>

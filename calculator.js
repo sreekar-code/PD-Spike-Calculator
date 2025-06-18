@@ -56,18 +56,23 @@ export function setupCalculator() {
   }
 
   function validateUsers(value) {
+    // If empty or not a number, return null (no validation needed)
+    if (!value || value.trim() === '') {
+      return null
+    }
+
     const users = parseInt(value)
     
     if (isNaN(users) || users < MIN_USERS) {
       showPopup(`Please enter a minimum of ${MIN_USERS} user.`)
-      usersInput.value = MIN_USERS
-      return MIN_USERS
+      usersInput.value = ''
+      return null
     }
     
     if (users > MAX_USERS) {
       showPopup(`Maximum number of users allowed is ${MAX_USERS.toLocaleString()}.`)
-      usersInput.value = MAX_USERS
-      return MAX_USERS
+      usersInput.value = ''
+      return null
     }
     
     return users
@@ -75,6 +80,28 @@ export function setupCalculator() {
 
   function calculateCosts() {
     const users = validateUsers(usersInput.value)
+    
+    // If no valid users entered, show placeholder values
+    if (users === null) {
+      spikePrice.textContent = '-'
+      pagerdutyPrice.textContent = '-'
+      savingsAmount.textContent = '-'
+      savingsPercentage.textContent = 'Enter users to calculate'
+      
+      // Update add-ons status based on toggle
+      const includeAddons = addonsToggle.checked
+      if (includeAddons) {
+        addonsStatus.textContent = 'Essential add-ons included'
+        addonsStatus.style.background = 'rgba(16, 185, 129, 0.1)'
+        addonsStatus.style.color = '#059669'
+      } else {
+        addonsStatus.textContent = 'Add-ons not included'
+        addonsStatus.style.background = 'rgba(239, 68, 68, 0.1)'
+        addonsStatus.style.color = '#dc2626'
+      }
+      return
+    }
+
     const includeAddons = addonsToggle.checked
     
     // Calculate annual costs
@@ -119,6 +146,6 @@ export function setupCalculator() {
   usersInput.setAttribute('inputmode', 'numeric')
   usersInput.setAttribute('pattern', '[0-9]*')
 
-  // Initial calculation
+  // Initial calculation (will show placeholders since no value is set)
   calculateCosts()
 }
