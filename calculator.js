@@ -13,6 +13,10 @@ export function setupCalculator() {
   const PAGERDUTY_ANNUAL_PER_USER = 720 // $60/month * 12
   const PAGERDUTY_ADDONS_ANNUAL = 144000 // flat rate per year
 
+  // Validation constants
+  const MIN_USERS = 1
+  const MAX_USERS = 99999
+
   function formatCurrency(amount) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -22,8 +26,55 @@ export function setupCalculator() {
     }).format(amount).replace('$', '')
   }
 
+  function showPopup(message) {
+    // Create popup overlay
+    const overlay = document.createElement('div')
+    overlay.className = 'popup-overlay'
+    
+    // Create popup content
+    const popup = document.createElement('div')
+    popup.className = 'popup'
+    
+    popup.innerHTML = `
+      <div class="popup-content">
+        <div class="popup-icon">⚠️</div>
+        <h3>Invalid Input</h3>
+        <p>${message}</p>
+        <button class="popup-button" onclick="this.closest('.popup-overlay').remove()">OK</button>
+      </div>
+    `
+    
+    overlay.appendChild(popup)
+    document.body.appendChild(overlay)
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+      if (overlay.parentNode) {
+        overlay.remove()
+      }
+    }, 5000)
+  }
+
+  function validateUsers(value) {
+    const users = parseInt(value)
+    
+    if (isNaN(users) || users < MIN_USERS) {
+      showPopup(`Please enter a minimum of ${MIN_USERS} user.`)
+      usersInput.value = MIN_USERS
+      return MIN_USERS
+    }
+    
+    if (users > MAX_USERS) {
+      showPopup(`Maximum number of users allowed is ${MAX_USERS.toLocaleString()}.`)
+      usersInput.value = MAX_USERS
+      return MAX_USERS
+    }
+    
+    return users
+  }
+
   function calculateCosts() {
-    const users = parseInt(usersInput.value) || 1
+    const users = validateUsers(usersInput.value)
     const includeAddons = addonsToggle.checked
     
     // Calculate annual costs
@@ -59,7 +110,14 @@ export function setupCalculator() {
 
   // Event listeners
   usersInput.addEventListener('input', calculateCosts)
+  usersInput.addEventListener('blur', calculateCosts) // Validate on blur as well
   addonsToggle.addEventListener('change', calculateCosts)
+
+  // Set input attributes for better mobile experience
+  usersInput.setAttribute('min', MIN_USERS)
+  usersInput.setAttribute('max', MAX_USERS)
+  usersInput.setAttribute('inputmode', 'numeric')
+  usersInput.setAttribute('pattern', '[0-9]*')
 
   // Initial calculation
   calculateCosts()
